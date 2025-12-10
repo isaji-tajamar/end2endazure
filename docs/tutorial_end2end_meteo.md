@@ -190,6 +190,8 @@ Tutorial para el despliegue: [Configurar Jobs Databricks](./paso_a_paso_jobs.md)
 
 ## 8. Integración prevista con Power BI (no implementada por problemas de autenticación)
 
+### Ya implementada. Más información [aquí](./power_bi_config.md).
+
 La arquitectura diseñada para este proyecto contempla que Power BI consuma directamente los datos del **tier Gold** del Lakehouse para generar paneles de visualización en tiempo real o cuasi tiempo real.  
 Para ello, la opción recomendada consistía en utilizar **Azure Synapse Analytics Serverless SQL** como capa de consulta intermedia entre el Delta Lake y Power BI.
 

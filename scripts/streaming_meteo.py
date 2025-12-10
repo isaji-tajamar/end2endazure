@@ -7,11 +7,11 @@ from azure.eventhub import EventHubProducerClient, EventData
 # ------------------------------------------------------
 # CONFIGURACIÓN
 # ------------------------------------------------------
-EVENT_HUB_CONNECTION_STR = "TU_CONNECTION_STRING"
+EVENT_HUB_CONNECTION_STR = "TU-ENDPOINT"
 EVENT_HUB_NAME = "eh-weather"
 
 # Intervalo entre envíos (segundos)
-INTERVALO = 120
+INTERVALO = 5
 
 # IP simulada del sensor
 SENSOR_IP = "192.168.1.50"

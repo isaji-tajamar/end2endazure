@@ -51,12 +51,10 @@ Tomar los datos de Bronze (streaming) y transformarlos hacia Silver en tiempo re
 
 ---
 
-# 3. Job 3 — Batch ETL (Bronze Batch → Silver → Gold)
+# 3. Job 3 — Batch ETL (Bronze Batch → Silver)
 
 ## Objetivo
-Procesar los datos batch que llegan al Data Lake y actualizar Silver y Gold.
-
-Este Job incluye dos tareas encadenadas.
+Procesar los datos batch que llegan al Data Lake y actualizar Silver.
 
 ---
 
@@ -81,24 +79,7 @@ Este Job incluye dos tareas encadenadas.
 
 ---
 
-## 3.3 Task B — Silver → Gold
-
-1. Pulsa **Add task**.
-2. Configura:
-   - **Task name:** `silver_to_gold`
-   - **Type:** Notebook
-   - **Notebook path:** `silver_to_gold_weather`
-3. En **Depends on**, selecciona:
-   - `bronze_to_silver_batch`
-4. Configura **Compute**:
-   - Usar el mismo job cluster o uno nuevo.
-5. Ajustes:
-   - **Retries:** 2
-   - **Retry interval:** 20–30 min
-
----
-
-## 3.4 Programación del Job
+## 3.3 Programación del Job
 
 1. En la parte inferior del Job, pulsa **Add schedule**.
 2. Configúralo:
@@ -109,28 +90,46 @@ Este Job incluye dos tareas encadenadas.
 
 ![alt text](../screenshots/databricks_schedule_job.png)
 
+
+# 4. Job 4 — Streaming Silver → Gold
+Creamos un nuevo job que ejecute el nuevo notebook silver_to_gold.ipynb cada pocos segundos.
+
+## Objetivo
+Tomar los datos de Silver y transformarlos hacia Gold en tiempo real.
+
+## Pasos
+
+1. En **Workflows → Jobs**, crea un nuevo Job.
+2. Nombre: `job_silver_to_gold`
+3. En **Tasks**:
+   - **Task name:** `silver_to_gold`
+   - **Type:** Notebook
+   - **Notebook path:** `silver_to_gold`
+4. Configura **Compute** con tu clúster.
+5. Ajustes importantes:
+   - **Retries:** 3
+   - **Schedule** cada minuto
+6. Guarda el Job.
+7. Inicia el pipeline ejecutando **Run now** cuando el Job 1 y el Job 2 estén corriendo.
+
+![alt text](../screenshots/databricks_nuevo_job_silver_gold.png)
+
+![alt text](../screenshots/databricks_new_job_schedule.png)
+
 ---
 
-# 4. Resumen Final de los Jobs
-
-| Job | Función | Tipo | Estado |
-|-----|---------|------|--------|
-| Job 1 | Event Hubs → Bronze | Streaming | Ejecutándose continuamente |
-| Job 2 | Bronze → Silver | Streaming | Ejecutándose continuamente |
-| Job 3 | Bronze Batch → Silver → Gold | Batch | Programado cada hora |
-
----
-
-# 5. Inicio de Pipelines
+# 4. Inicio de Pipelines
 
 ### Para pruebas/demostración:
 1. Ejecutar Job 1  
 2. Ejecutar Job 2  
 3. Dejar que Job 3 se ejecute según schedule o ejecutarlo manualmente
+4. Dejar que Job 4 se ejecute según schedule o ejecutarlo manualmente
 
 ### En producción:
 - Jobs 1 y 2 corren permanentemente  
 - Job 3 corre automáticamente cada hora
+- Job 4 corre automáticamente cada minuto
 
 ---
 
