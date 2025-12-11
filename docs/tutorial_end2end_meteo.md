@@ -188,7 +188,10 @@ Además, Databricks ofrece un control más granular del ciclo de vida del cluste
 
 Tutorial para el despliegue: [Configurar Jobs Databricks](./paso_a_paso_jobs.md).
 
-## 8. Integración prevista con Power BI (no implementada por problemas de autenticación)
+## 8. Scripts de python
+Para que los datos lleguene a event hubs por streaming y al contenedor en batch tenemos que ejecutar los scripts de simulación correspondientes. Las instrucciones para hacerlo están en el siguiente documento: [Tutorial scripts](./tutorial_scripts_meteo.md)
+
+## 9. Integración prevista con Power BI (no implementada por problemas de autenticación)
 
 ### Ya implementada. Más información [aquí](./power_bi_config.md).
 
