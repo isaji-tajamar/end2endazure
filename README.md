@@ -2,6 +2,9 @@
 
 Este repositorio contiene todos los recursos utilizados para el desarrollo del proyecto **Meteo End-to-End en Azure**, un flujo completo de ingesta, procesamiento y consumo de datos meteorológicos tanto en *streaming* como en *batch*, siguiendo la arquitectura **medallion** (Bronze → Silver → Gold).
 
+> [!IMPORTANT] 
+> # Para seguir el tutorial hay que leerse el siguiente archivo: [Tutorial end2end](./docs/tutorial_end2end_meteo.md)
+
 ## 📁 Estructura del repositorio
 
 ### `docs/`
